@@ -1,0 +1,32 @@
+apiVersion: tekton.dev/v1
+kind: PipelineRun
+metadata:
+  generateName: fastapi-tekton-app-run-
+  labels:
+    app.kubernetes.io/name: fastapi-tekton-app
+    tekton.dev/pipeline: fastapi-tekton-app-pipeline
+spec:
+  pipelineRef:
+    name: fastapi-tekton-app-pipeline
+  params:
+    - name: git-url
+      value: "https://github.com/jordanpasildo-tmx/fastapi-tekton-app.git"
+    - name: git-revision
+      value: "main"
+    - name: image-name
+      value: "fastapi-tekton-app"
+    - name: image-tag
+      value: "latest"
+  workspaces:
+    - name: shared-workspace
+      volumeClaimTemplate:
+        spec:
+          accessModes:
+            - ReadWriteOnce
+          resources:
+            requests:
+              storage: 2Gi
+    - name: registry-credentials
+      emptyDir: {}
+    - name: cosign-secret
+      emptyDir: {}

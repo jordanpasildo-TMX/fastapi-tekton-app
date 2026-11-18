@@ -1,0 +1,18 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: fastapi-tekton-app
+  description: Production-hardened Python FastAPI microservice on OpenShift
+  annotations:
+    github.com/project-slug: jordanpasildo-tmx/fastapi-tekton-app
+    tekton.dev/pipeline: fastapi-tekton-app-pipeline
+    janus-idp.io/tekton: fastapi-tekton-app
+  tags:
+    - python
+    - fastapi
+    - golden-path
+    - ubi9
+spec:
+  type: service
+  lifecycle: experimental
+  owner: group:default/jordanpasildo-tmx
